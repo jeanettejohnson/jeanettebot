@@ -41,7 +41,7 @@ async def issue_opened_event(event, gh, *args, **kwargs):
     author = event.data["comment"]["user"]["login"]
 
     #if author == "jeanettejohnson":
-    await gh.post(url, data={"content": "hooray"}, accept={"application/vnd.github.squirrel-girl-preview+json"})
+    await gh.post(url, data={"content": "hooray"}, accept='application/vnd.github.squirrel-girl-preview+json')
 
 
 async def main(request):
