@@ -35,10 +35,9 @@ async def pull_request_event(event, gh, *args, **kwargs):
 
 @router.register("issue_comment", action="created")
 async def issue_opened_event(event, gh, *args, **kwargs):
-    """
-    Whenever an issue is opened, greet the author and say thanks.
-    """
-    url = event.data["issue_comment"]["comment"]["url"]
+    print(event.data)
+    url = event.data["issue_comment"]["comment_url"]
+
     author = event.data["issue_comment"]["comment"]["user"]["login"]
 
     #if author == "jeanettejohnson":
