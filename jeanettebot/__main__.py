@@ -33,6 +33,16 @@ async def pull_request_event(event, gh, *args, **kwargs):
         await gh.post(url, data={"body": message})
 
 
+@router.register("issue_comment", action="created")
+async def issue_opened_event(event, gh, *args, **kwargs):
+    """
+    Whenever an issue is opened, greet the author and say thanks.
+    """
+    url = event.data["issue_comment"]["comment"]["url"]
+    author = event.data["issue_comment"]["comment"]["user"]["login"]
+
+    #if author == "jeanettejohnson":
+    await gh.post(url, data={"content": "hooray"}, accept={"application/vnd.github.squirrel-girl-preview+json"})
 
 
 async def main(request):
