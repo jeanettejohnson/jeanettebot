@@ -21,6 +21,20 @@ async def issue_opened_event(event, gh, *args, **kwargs):
     await gh.post(url, data={"body": message})
 
 
+@router.register("pull_request", action="closed")
+async def pull_request_event(event, gh, *args, **kwargs):
+    """
+    Whenever a pull request is merged, say thanks.
+    """
+    url = event.data["pull_request"]["comments_url"]
+    merged = event.data["pull_request"]["merged"]
+    if merged:
+        message = f"Thanks for merging this pr! (I'm a bot)."
+        await gh.post(url, data={"body": message})
+
+
+
+
 async def main(request):
     body = await request.read()
 
